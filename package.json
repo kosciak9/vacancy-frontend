@@ -2,6 +2,7 @@
   "name": "vacancy-frontend",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://localhost:8001",
   "dependencies": {
     "@emotion/core": "^10.0.10",
     "axios": "^0.18.0",
