@@ -17,16 +17,9 @@ const ButtonStyle = {
   border: "none"
 };
 
-const turnOnWholeDay = (availability, updateAvailability) => {
+const turnWholeDay = (availability, updateAvailability, value) => {
   availability.map(hour => {
-    changeAvailability(hour.id, true).then(() => updateAvailability());
-    return true;
-  });
-};
-
-const turnOffWholeDay = (availability, updateAvailability) => {
-  availability.map(hour => {
-    changeAvailability(hour.id, false).then(() => updateAvailability());
+    changeAvailability(hour.id, value).then(() => updateAvailability());
     return true;
   });
 };
@@ -75,7 +68,7 @@ const DayContainer = ({ day, availability, updateAvailability }) => {
           </button>
           <button
             css={{ ...ButtonStyle, backgroundColor: "#76A81F" }}
-            onClick={() => turnOnWholeDay(availability, updateAvailability)}
+            onClick={() => turnWholeDay(availability, updateAvailability, true)}
           >
             <img
               src={all}
@@ -88,7 +81,9 @@ const DayContainer = ({ day, availability, updateAvailability }) => {
               ...ButtonStyle,
               backgroundColor: "rgba(226, 104, 60, 0.75)"
             }}
-            onClick={() => turnOffWholeDay(availability, updateAvailability)}
+            onClick={() =>
+              turnWholeDay(availability, updateAvailability, false)
+            }
           >
             <img
               src={none}
