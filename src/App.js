@@ -10,7 +10,13 @@ const App = () => {
     <div css={{ height: "100%", width: "100%" }}>
       <Provider>
         <Subscribe to={[LoginContainer]}>
-          {login => (login.state.userLoggedIn ? <RouterView /> : <LoginView />)}
+          {login =>
+            login.state.userLoggedIn ? (
+              <RouterView login={login} />
+            ) : (
+              <LoginView login={login} />
+            )
+          }
         </Subscribe>
       </Provider>
     </div>
