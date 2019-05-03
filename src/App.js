@@ -1,14 +1,20 @@
 /** @jsx jsx */
 import { jsx } from "@emotion/core";
 import LoginView from "./pages/LoginView";
+import RouterView from "./pages/RouterView";
+import { Provider, Subscribe } from "unstated";
+import LoginContainer from "./store/LoginContainer";
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header" />
-      <LoginView />
+    <div css={{ height: "100%", width: "100%" }}>
+      <Provider>
+        <Subscribe to={[LoginContainer]}>
+          {login => (login.state.userLoggedIn ? <RouterView /> : <LoginView />)}
+        </Subscribe>
+      </Provider>
     </div>
   );
-}
+};
 
 export default App;
