@@ -45,6 +45,7 @@ const NavigationBar = props => {
         padding: 20,
         width: "100%",
         alignItems: "center",
+        backgroundColor: "#fff",
         justifyContent: "center"
       }}
     >

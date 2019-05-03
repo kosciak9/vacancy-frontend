@@ -12,7 +12,7 @@ const App = () => {
         <Subscribe to={[LoginContainer]}>
           {login =>
             login.state.userLoggedIn ? (
-              <RouterView login={login} />
+              <RouterView />
             ) : (
               <LoginView login={login} />
             )
