@@ -1,8 +1,12 @@
 /** @jsx jsx */
 import { jsx } from "@emotion/core";
+import { useEffect } from "react";
 import LoginForm from "../components/LoginForm";
 
-const LoginView = () => {
+const LoginView = props => {
+  useEffect(() => {
+    props.login.userLogin({});
+  });
   return (
     <main
       css={{

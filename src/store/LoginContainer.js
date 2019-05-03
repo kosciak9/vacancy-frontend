@@ -32,11 +32,11 @@ class LoginContainer extends Container {
     if (username && password) {
       token = await this.fetchUserToken(username, password);
     } else {
-      // token = localStorage.getItem("userToken", null);
+      token = localStorage.getItem("userToken", null);
     }
     if (token) {
       this.setAxiosHeader(token);
-      // localStorage.setItem("userToken", token);
+      localStorage.setItem("userToken", token);
       await this.setState({ userLoggedIn: true, __action: "USERLOGIN" });
       return true;
     } else {
