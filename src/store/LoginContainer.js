@@ -9,13 +9,10 @@ class LoginContainer extends Container {
   };
 
   fetchUserToken = async (username, password) => {
-    const response = await axios.post(
-      "http://localhost:8001/auth/token/login/",
-      {
-        username,
-        password
-      }
-    );
+    const response = await axios.post("/auth/token/login/", {
+      username,
+      password
+    });
     return response.data.auth_token;
   };
 
