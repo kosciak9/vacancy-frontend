@@ -33,8 +33,7 @@ const RouterView = () => {
         paddingTop: 100,
         width: "100%",
         display: "grid",
-        justifyContent: "center",
-        alignItems: "center",
+        justifyItems: "center",
         [mq[0]]: {
           gridTemplateColumns: gridTemplateColumnsCount[0]
         },
