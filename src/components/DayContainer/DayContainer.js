@@ -18,10 +18,11 @@ const ButtonStyle = {
 };
 
 const turnWholeDay = (availability, updateAvailability, value) => {
-  availability.map(hour => {
-    changeAvailability(hour.id, value).then(() => updateAvailability());
+  availability.map(async hour => {
+    await changeAvailability(hour.id, value);
     return true;
   });
+  updateAvailability();
 };
 
 const DayContainer = ({ day, availability, updateAvailability }) => {

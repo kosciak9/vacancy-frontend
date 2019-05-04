@@ -41,6 +41,21 @@ class LoginContainer extends Container {
     }
   };
 
+  changePassword = ({ newPassword, reNewPassword, currentPassword }) => {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const response = await axios.post("/auth/password/", {
+          new_password: newPassword,
+          re_new_password: reNewPassword,
+          current_password: currentPassword
+        });
+        resolve(response);
+      } catch (error) {
+        reject(error);
+      }
+    });
+  };
+
   userLogout = async () => {
     console.log("test");
     localStorage.removeItem("userToken");
