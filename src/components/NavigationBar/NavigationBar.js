@@ -55,6 +55,9 @@ const NavigationBar = props => {
       <NavLink css={NavigationLink} to="/captain">
         Captain View
       </NavLink>
+      <NavLink css={NavigationLink} to="/settings">
+        Personal Settings
+      </NavLink>
       <button
         css={{ ...NavigationLink, ...LogoutButton }}
         onClick={props.login.userLogout}
