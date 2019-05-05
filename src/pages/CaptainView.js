@@ -1,8 +1,10 @@
 /** @jsx jsx */
 import { jsx } from "@emotion/core";
 
+import CaptainContainer from "../components/CaptainContainer";
+
 const CaptainView = () => {
-  return <span>captain test</span>;
+  return <CaptainContainer />;
 };
 
 export default CaptainView;

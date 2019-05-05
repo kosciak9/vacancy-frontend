@@ -46,7 +46,8 @@ const NavigationBar = props => {
         width: "100%",
         alignItems: "center",
         backgroundColor: "#fff",
-        justifyContent: "center"
+        justifyContent: "center",
+        zIndex: 100
       }}
     >
       <NavLink css={NavigationLink} to="/availability">
