@@ -1,21 +1,14 @@
 /** @jsx jsx */
 import { jsx } from "@emotion/core";
 import { format } from "date-fns";
-import { changeAvailability } from "../HourInput/HourInput";
+import { changeAvailability } from "components/availability/HourInput";
 
-import clone from "./clone.svg";
-import all from "./all.svg";
-import none from "./none.svg";
-// import maybe from "./percent.svg";
-// import tick from "./tick.svg";
+import clone from "components/common/svgs/clone.svg";
+import all from "components/common/svgs/all.svg";
+import none from "components/common/svgs/none.svg";
 
-import HourInput from "../HourInput";
-
-const ButtonStyle = {
-  width: 36,
-  height: 28,
-  border: "none"
-};
+import HourInput from "components/availability/HourInput";
+import SVGButton from "components/common/SVGButton";
 
 const turnWholeDay = (availability, updateAvailability, value) => {
   availability.map(async hour => {
@@ -50,9 +43,6 @@ const DayContainer = ({ day, availability, updateAvailability }) => {
     >
       <h2 css={{ textAlign: "center" }}>
         {formattedDay}
-        {
-          //<span css={{ color: "red" }}>·</span>
-        }
         <div
           css={{
             display: "flex",
@@ -60,38 +50,31 @@ const DayContainer = ({ day, availability, updateAvailability }) => {
             marginTop: 20
           }}
         >
-          <button css={{ ...ButtonStyle, backgroundColor: "#961FA8" }}>
-            <img
-              src={clone}
-              alt="clone previous week"
-              css={{ display: "block", margin: "auto" }}
-            />
-          </button>
-          <button
-            css={{ ...ButtonStyle, backgroundColor: "#76A81F" }}
+          <SVGButton
+            width={36}
+            height={28}
+            backgroundColor={"#961FA8"}
+            image={clone}
+            altText={"clone previous week"}
+          />
+          <SVGButton
+            width={36}
+            height={28}
+            backgroundColor={"#76A81F"}
             onClick={() => turnWholeDay(availability, updateAvailability, true)}
-          >
-            <img
-              src={all}
-              alt="select all as possible to come"
-              css={{ display: "block", margin: "auto" }}
-            />
-          </button>
-          <button
-            css={{
-              ...ButtonStyle,
-              backgroundColor: "rgba(226, 104, 60, 0.75)"
-            }}
+            image={all}
+            altText="select all as possible to come"
+          />
+          <SVGButton
+            width={36}
+            height={28}
+            backgroundColor={"rgba(226, 104, 60, 0.75)"}
             onClick={() =>
               turnWholeDay(availability, updateAvailability, false)
             }
-          >
-            <img
-              src={none}
-              alt="select all as impossible to come"
-              css={{ display: "block", margin: "auto" }}
-            />
-          </button>
+            image={none}
+            alt={"select all as impossible to come"}
+          />
         </div>
       </h2>
       {children}

@@ -3,14 +3,13 @@ import { jsx } from "@emotion/core";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
 import { Subscribe, Provider } from "unstated";
-import LoginContainer from "../store/LoginContainer";
+import LoginContainer from "store/LoginContainer";
 
-import NavigationBar from "../components/NavigationBar";
+import NavigationBar from "components/common/NavigationBar";
 
-import AvailabilityView from "./AvailabilityView";
-import CaptainView from "./CaptainView";
-import PersonalSettingsView from "./PersonalSettingsView";
-// import TeamSettingsView from "./TeamSettingsView";
+import AvailabilityView from "components/availability/AvailabilityView";
+import CaptainView from "components/captain/CaptainView";
+import PersonalSettingsView from "components/settings/PersonalSettingsView";
 
 const RouterView = () => {
   return (

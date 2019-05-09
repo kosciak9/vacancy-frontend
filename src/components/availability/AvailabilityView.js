@@ -2,8 +2,8 @@
 import { jsx } from "@emotion/core";
 import { Provider, Subscribe } from "unstated";
 
-import LoginContainer from "../store/LoginContainer";
-import AvailabilityContainer from "../components/AvailabilityContainer";
+import LoginContainer from "store/LoginContainer";
+import AvailabilityContainer from "components/availability/AvailabilityContainer";
 
 const AvailabilityView = () => {
   return (

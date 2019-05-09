@@ -2,9 +2,8 @@
 import { jsx } from "@emotion/core";
 import { useEffect, useState } from "react";
 import axios from "axios";
-// import { findIndex } from "lodash";
 import { forIn } from "lodash";
-import DayContainer from "../DayContainer";
+import InputDayContainer from "components/availability/InputDayContainer";
 
 const breakpoints = [400, 576, 1000, 1400];
 
@@ -40,7 +39,7 @@ const AvailabilityContainer = () => {
   const children = [];
   forIn(availability, (availability, day) => {
     children.push(
-      <DayContainer
+      <InputDayContainer
         key={day}
         day={day}
         availability={availability}

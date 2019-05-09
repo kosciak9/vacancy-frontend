@@ -1,7 +1,9 @@
 /** @jsx jsx */
 /** @jsx jsx */
 import { jsx } from "@emotion/core";
-import PasswordChange from "../components/PasswordChange";
+import LoginContainer from "../../store/LoginContainer";
+import { Provider, Subscribe } from "unstated";
+import PasswordChange from "components/settings/PasswordChange";
 
 const PersonalSettingsView = () => {
   return (
@@ -14,7 +16,11 @@ const PersonalSettingsView = () => {
         paddingTop: 100
       }}
     >
-      <PasswordChange />
+      <Provider>
+        <Subscribe to={[LoginContainer]}>
+          {login => <PasswordChange login={login} />}
+        </Subscribe>
+      </Provider>
     </main>
   );
 };

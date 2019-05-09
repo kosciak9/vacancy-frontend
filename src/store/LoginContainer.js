@@ -16,6 +16,12 @@ class LoginContainer extends Container {
     return response.data.auth_token;
   };
 
+  fetchUserInfo = async () => {
+    const userInfo = await axios.get("/auth/user/me");
+    const playerInfo = await axios.get(`/v1/users/${userInfo.data.id}`);
+    this.setState({ team: playerInfo.data.team });
+  };
+
   setAxiosHeader = token => {
     if (token) {
       axios.defaults.headers.common["Authorization"] = `Token ${token}`;
@@ -29,13 +35,13 @@ class LoginContainer extends Container {
     if (username && password) {
       token = await this.fetchUserToken(username, password);
     } else {
-      token = localStorage.getItem("userToken", null);
+      token = localStorage.getItem("userToken");
     }
     if (token) {
       this.setAxiosHeader(token);
       localStorage.setItem("userToken", token);
       await this.setState({ userLoggedIn: true, __action: "USERLOGIN" });
-      return true;
+      return;
     } else {
       return false;
     }
