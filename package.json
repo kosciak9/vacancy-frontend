@@ -19,11 +19,21 @@
     "unstated": "^2.1.1",
     "unstated-logger": "^1.0.1"
   },
+  "jest": {
+    "collectCoverageFrom": [
+      "./src"
+    ],
+    "coverageReporters": [
+      "lcov"
+    ],
+    "coverageDirectory": "coverage"
+  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "coverage": "yarn run test -- --coverage | ./node_modules/coveralls/bin/coveralls.js"
   },
   "eslintConfig": {
     "extends": "react-app"

@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import { jsx } from "@emotion/core";
 import { useEffect } from "react";
-import { values, transform } from "lodash";
+import { transform } from "lodash";
 import OutputDay from "components/captain/OutputDay";
 
 const OutputDayContainer = ({ captain }) => {
