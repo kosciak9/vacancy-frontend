@@ -1,8 +1,7 @@
 {
   "name": "vacancy-frontend",
   "version": "0.1.0",
-  "private": true,
-  "proxy": "http://localhost:8002",
+  "private": false,
   "dependencies": {
     "@emotion/core": "^10.0.10",
     "axios": "^0.18.0",
@@ -14,7 +13,7 @@
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-router-dom": "^5.0.0",
-    "react-scripts": "3.0.0",
+    "react-scripts": "3.0.1",
     "react-table": "^6.10.0",
     "typography": "^0.16.19",
     "unstated": "^2.1.1",
@@ -50,6 +49,7 @@
   "devDependencies": {
     "@commitlint/cli": "^7.5.2",
     "@commitlint/config-conventional": "^7.5.0",
+    "http-proxy-middleware": "^0.19.1",
     "husky": "^2.2.0",
     "prettier": "^1.17.0",
     "pretty-quick": "^1.10.0",
