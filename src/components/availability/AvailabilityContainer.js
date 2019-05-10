@@ -20,7 +20,7 @@ const gridTemplateColumnsCount = breakpoints.map(bp => {
 });
 
 const getPriorityAvailability = async () => {
-  const response = await axios.get("/v1/priority/");
+  const response = await axios.get("/api/v1/priority/");
   const state = {};
   for (let i = 0; i < response.data.length; i++) {
     const date = response.data[i].date;

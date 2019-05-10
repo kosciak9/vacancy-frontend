@@ -5,7 +5,7 @@ import axios from "axios";
 const changeAvailability = async (id, available) => {
   return new Promise((resolve, reject) => {
     axios
-      .patch(`/v1/availability/${id}/`, { available })
+      .patch(`/api/v1/availability/${id}/`, { available })
       .then(resolve())
       .catch(reject());
   });

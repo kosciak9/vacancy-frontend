@@ -10,7 +10,7 @@ class CaptainContainer extends Container {
   };
 
   getTeamAvailability = async () => {
-    const response = await axios.get("/v1/priority/team/");
+    const response = await axios.get("/api/v1/priority/team/");
     const update = {};
     for (let i = 0; i < response.data.length; i++) {
       const date = response.data[i].date;
@@ -21,10 +21,12 @@ class CaptainContainer extends Container {
   };
 
   getPlayers = async () => {
-    const userDetails = await axios.get("/auth/me/");
-    const playerDetails = await axios.get(`/v1/users/${userDetails.data.id}/`);
+    const userDetails = await axios.get("/api/auth/me/");
+    const playerDetails = await axios.get(
+      `/api/v1/users/${userDetails.data.id}/`
+    );
     const playerList = await axios.get(
-      `/v1/users/?username=&team=${playerDetails.data.team}`
+      `api/v1/users/?username=&team=${playerDetails.data.team}`
     );
     const update = keyBy(playerList.data, element => element.id);
     this.setState({ players: update });

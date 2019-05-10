@@ -9,7 +9,7 @@ class LoginContainer extends Container {
   };
 
   fetchUserToken = async (username, password) => {
-    const response = await axios.post("/auth/token/login/", {
+    const response = await axios.post("/api/auth/token/login/", {
       username,
       password
     });
@@ -17,8 +17,8 @@ class LoginContainer extends Container {
   };
 
   fetchUserInfo = async () => {
-    const userInfo = await axios.get("/auth/user/me");
-    const playerInfo = await axios.get(`/v1/users/${userInfo.data.id}`);
+    const userInfo = await axios.get("/api/auth/user/me");
+    const playerInfo = await axios.get(`/api/v1/users/${userInfo.data.id}`);
     this.setState({ team: playerInfo.data.team });
   };
 
@@ -50,7 +50,7 @@ class LoginContainer extends Container {
   changePassword = ({ newPassword, reNewPassword, currentPassword }) => {
     return new Promise(async (resolve, reject) => {
       try {
-        const response = await axios.post("/auth/password/", {
+        const response = await axios.post("/api/auth/password/", {
           new_password: newPassword,
           re_new_password: reNewPassword,
           current_password: currentPassword
