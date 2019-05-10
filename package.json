@@ -25,8 +25,7 @@
     ],
     "coverageReporters": [
       "lcov"
-    ],
-    "coverageDirectory": "coverage"
+    ]
   },
   "scripts": {
     "start": "react-scripts start",
