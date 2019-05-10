@@ -49,6 +49,8 @@
   "devDependencies": {
     "@commitlint/cli": "^7.5.2",
     "@commitlint/config-conventional": "^7.5.0",
+    "enzyme": "^3.9.0",
+    "enzyme-adapter-react-16": "^1.12.1",
     "http-proxy-middleware": "^0.19.1",
     "husky": "^2.2.0",
     "prettier": "^1.17.0",
