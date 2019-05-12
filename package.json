@@ -54,6 +54,7 @@
     "@commitlint/cli": "^7.5.2",
     "@commitlint/config-conventional": "^7.5.0",
     "@types/jest": "^24.0.12",
+    "babel-jest": "^24.8.0",
     "coveralls": "^3.0.3",
     "enzyme": "^3.9.0",
     "enzyme-adapter-react-16": "^1.12.1",
@@ -62,5 +63,15 @@
     "prettier": "^1.17.0",
     "pretty-quick": "^1.10.0",
     "standard-version": "^5.0.2"
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "**/src/**/*.js",
+      "!**/setupProxy.js",
+      "!**/serviceWorker.js",
+      "!src/index.js",
+      "!**/node_modules/**",
+      "!**/vendor/**"
+    ]
   }
 }
