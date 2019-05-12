@@ -1,9 +1,16 @@
 language: node_js
 node_js:
-  - "stable"
+  - stable
 cache:
   directories:
     - node_modules
 script:
   - yarn test
   - yarn run build
+deploy:
+  provider: heroku
+  api_key:
+    secure: rARcNizXZU3h0eCTPVJRF+L1/ULTwwKTNtX1I+yBww05rhDa68z5ZQ5GhNeAX/RpVJYfxk8RRIj+L0NIwlpyytbnhun8RkB7BAzwKb+Al9kYOrsCp4sORuEA8v6+RA0caakkt7EWARs3L1f6m3Kbnz0uhIw3lDSojM2ixl2dwY73lvyfE1CvcFQZfcQEV1Mg3k5MFg1/hCXClvPXxHMOqmir2xkmwJS4TkJyNWc4NQs0i6m2kGnGt0Xp7jY5cT6zj2IcC4hNAIQE6KHZD1Y8k6FrCbZTAg15s1Z2q08uR/IMbInn26AO/wPA1fbYnYC/Jn110fBB2HN88sWfUXy0tcRsRKdSnL0rWZdLL/6CkO9scVp3iy8H5UfHgb+g5kb82Jw5HiLB7GtZrx4eBD6hb2k4QS+J43wkDAy1mgl9QV/WhIxujXdqZuTk86x4mSw/htllrZESW85ad4X30pKuRGu9wHg/AZG7QWBjTI/jCTe1L3X5nIe8Y1yurKxMYh2YV36DiMbBfa3JCbynDacDybRaF4OMpAQqCQsHsxtMhFOUERlRZrP0r2VgICVBrdQP41ZEZKNMPt8faqMeKH/AfW+BLLAmxeSO2SLFnHuiQexTAZKEGV1HcUU9KRe8m2KKN3cOgs1vS3p93Fbn/QflkDqEk6HVPuX9thde72EoOZo=
+  app: good-vacancy-frontend
+  on:
+    repo: kosciak9/vacancy-frontend
