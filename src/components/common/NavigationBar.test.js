@@ -6,7 +6,6 @@ import NavigationBar from "components/common/NavigationBar";
 import { MemoryRouter } from "react-router";
 import { NavLink } from "react-router-dom";
 import SVGButton from "components/common/SVGButton";
-// import { Route } from "react-router-dom";
 
 Enzyme.configure({ adapter: new Adapter() });
 
