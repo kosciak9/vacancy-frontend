@@ -9,7 +9,11 @@ const AvailabilityView = () => {
   return (
     <Provider>
       <Subscribe to={[LoginContainer]}>
-        {login => <AvailabilityContainer login={login} />}
+        {login => (
+          <main css={{ paddingTop: 100 }}>
+            <AvailabilityContainer client={login.state.client} />
+          </main>
+        )}
       </Subscribe>
     </Provider>
   );

@@ -19,7 +19,25 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
-    <title>React App</title>
+    <title>vacancy</title>
+    <style>
+      .AvailabilityRange
+        .DayPicker-Day--selected:not(.DayPicker-Day--start):not(.DayPicker-Day--end):not(.DayPicker-Day--outside) {
+        background-color: #f0f8ff !important;
+        color: #76a81f;
+      }
+      .AvailabilityRange .DayPicker-Day {
+        border-radius: 0 !important;
+      }
+      .AvailabilityRange .DayPicker-Day--start {
+        border-top-left-radius: 50% !important;
+        border-bottom-left-radius: 50% !important;
+      }
+      .AvailabilityRange .DayPicker-Day--end {
+        border-top-right-radius: 50% !important;
+        border-bottom-right-radius: 50% !important;
+      }
+    </style>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
