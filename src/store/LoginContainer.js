@@ -5,7 +5,8 @@ class LoginContainer extends Container {
   name = "LoginContainer";
 
   state = {
-    userLoggedIn: false
+    userLoggedIn: false,
+    client: null
   };
 
   fetchUserToken = async (username, password) => {
@@ -24,9 +25,14 @@ class LoginContainer extends Container {
 
   setAxiosHeader = token => {
     if (token) {
-      axios.defaults.headers.common["Authorization"] = `Token ${token}`;
+      const client = axios.create({
+        headers: {
+          Authorization: `Token ${token}`
+        }
+      });
+      this.setState({ client });
     } else if (axios.defaults.headers.common["Authorization"]) {
-      delete axios.defaults.headers.common["Authorization"];
+      this.setState({ client: null });
     }
   };
 
