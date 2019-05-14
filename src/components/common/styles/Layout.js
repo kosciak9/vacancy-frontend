@@ -32,7 +32,7 @@ const floatingNavbar = css({
   width: "100%",
   display: "flex",
   alignItems: "center",
-  justifyContent: "center",
+  justifyContent: "flex-start",
   zIndex: 100
 });
 

@@ -16,11 +16,12 @@ import SVGButton from "components/common/SVGButton";
 
 const NavigationLink = css({
   width: 180,
-  height: 40,
+  height: 50,
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
   color: TextBlack,
+  textAlign: "center",
   textDecoration: "none",
   transition: "0.3s all",
   marginRight: 20,
@@ -33,13 +34,13 @@ const NavigationLink = css({
 });
 
 const LogoutButton = css({
-  width: 40,
+  width: 100,
+  height: 50,
   backgroundColor: opacify(-1, TextBlack),
   cursor: "pointer",
   marginRight: 0,
+  marginLeft: "auto",
   border: "none",
-  alignSelf: "flex-end",
-  justifySelf: "flex-end",
   "&:hover": {
     backgroundColor: WarningRedWithOpacity
   }
