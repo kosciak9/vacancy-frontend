@@ -1,8 +1,5 @@
 /** @jsx jsx */
 import { jsx } from "@emotion/core";
-import { Subscribe, Provider } from "unstated";
-import CaptainContainer from "store/CaptainContainer";
-import OutputDayContainer from "components/captain/OutputDayContainer";
 
 const CaptainView = () => {
   return (
@@ -15,11 +12,7 @@ const CaptainView = () => {
         justifyContent: "center"
       }}
     >
-      <Provider>
-        <Subscribe to={[CaptainContainer]}>
-          {captain => <OutputDayContainer captain={captain} />}
-        </Subscribe>
-      </Provider>
+      nothing here for now
     </main>
   );
 };
