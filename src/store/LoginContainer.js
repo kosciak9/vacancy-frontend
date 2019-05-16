@@ -6,7 +6,8 @@ class LoginContainer extends Container {
 
   state = {
     userLoggedIn: false,
-    client: null
+    agent: undefined,
+    team: {}
   };
 
   fetchUserToken = async (username, password) => {
@@ -18,22 +19,20 @@ class LoginContainer extends Container {
   };
 
   fetchUserInfo = async () => {
-    const userInfo = await axios.get("/api/auth/user/me");
-    const playerInfo = await axios.get(`/api/v1/users/${userInfo.data.id}`);
-    this.setState({ team: playerInfo.data.team });
+    const userInfo = await this.state.agent.get("/api/auth/user/me");
+    const playerInfo = await this.state.agent.get(
+      `/api/v1/users/${userInfo.data.id}/`
+    );
+    await this.setState({ team: playerInfo.data.team });
   };
 
-  setAxiosHeader = token => {
-    if (token) {
-      const client = axios.create({
-        headers: {
-          Authorization: `Token ${token}`
-        }
-      });
-      this.setState({ client });
-    } else if (axios.defaults.headers.common["Authorization"]) {
-      this.setState({ client: null });
-    }
+  prepareAxiosAgent = async token => {
+    const agent = token
+      ? axios.create({
+          headers: { authorization: `Bearer ${token}` }
+        })
+      : undefined;
+    await this.setState({ agent, __action: "AGENTCHANGE" });
   };
 
   userLogin = async ({ username = null, password = null }) => {
@@ -44,34 +43,31 @@ class LoginContainer extends Container {
       token = localStorage.getItem("userToken");
     }
     if (token) {
-      this.setAxiosHeader(token);
+      this.prepareAxiosAgent(token);
       localStorage.setItem("userToken", token);
       await this.setState({ userLoggedIn: true, __action: "USERLOGIN" });
-      return;
+      return true;
     } else {
       return false;
     }
   };
 
-  changePassword = ({ newPassword, reNewPassword, currentPassword }) => {
-    return new Promise(async (resolve, reject) => {
-      try {
-        const response = await axios.post("/api/auth/password/", {
-          new_password: newPassword,
-          re_new_password: reNewPassword,
-          current_password: currentPassword
-        });
-        resolve(response);
-      } catch (error) {
-        reject(error);
-      }
-    });
+  changePassword = async ({ newPassword, reNewPassword, currentPassword }) => {
+    try {
+      const response = await axios.post("/api/auth/password/", {
+        new_password: newPassword,
+        re_new_password: reNewPassword,
+        current_password: currentPassword
+      });
+      return response;
+    } catch (error) {
+      throw error;
+    }
   };
 
   userLogout = async () => {
-    console.log("test");
     localStorage.removeItem("userToken");
-    this.setAxiosHeader(null);
+    this.prepareAxiosAgent(null);
     await this.setState({ userLoggedIn: false, __action: "USERLOGOUT" });
   };
 }
