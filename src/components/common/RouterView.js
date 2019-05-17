@@ -8,7 +8,7 @@ import LoginContainer from "store/LoginContainer";
 import NavigationBar from "components/common/NavigationBar";
 
 import AvailabilityView from "components/availability/AvailabilityView";
-import CaptainView from "components/captain/CaptainView";
+import CaptainView from "components/availability/CaptainView";
 import PersonalSettingsView from "components/settings/PersonalSettingsView";
 
 const RouterView = () => {
