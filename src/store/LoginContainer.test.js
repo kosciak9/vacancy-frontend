@@ -1,5 +1,4 @@
 import LoginContainer from "store/LoginContainer";
-import axios from "axios";
 import moxios from "moxios";
 
 describe("LoginContainer", () => {
