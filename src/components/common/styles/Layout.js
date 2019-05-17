@@ -8,6 +8,7 @@ const flexCenter = css({
   alignItems: "center"
 });
 
+const flexCenterColumn = css([flexCenter, { flexDirection: "column" }]);
 const floatingWarning = css({
   color: "white",
   position: "fixed",
@@ -36,4 +37,11 @@ const floatingNavbar = css({
   zIndex: 100
 });
 
-export { floatingNavbar, formLayout, flexCenter, floatingWarning, buttonGroup };
+export {
+  floatingNavbar,
+  formLayout,
+  flexCenter,
+  flexCenterColumn,
+  floatingWarning,
+  buttonGroup
+};
