@@ -10,7 +10,6 @@ import "components/common/styles/DatePicker.css";
 import SVGButton from "components/common/SVGButton";
 import { InputOrange } from "components/common/styles/Colors";
 import { flexCenterColumn } from "components/common/styles/Layout";
-import { isTSTypeOperator } from "@babel/types";
 
 const DateInput = css([flexCenterColumn], {
   "> *": { margin: 10 },
