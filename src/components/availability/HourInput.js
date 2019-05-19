@@ -1,34 +1,19 @@
 /** @jsx jsx */
 import { jsx } from "@emotion/core";
 import axios from "axios";
+import { buttonGroup } from "components/common/styles/Layout";
 
-const changeAvailability = async (id, available) => {
-  return new Promise((resolve, reject) => {
-    axios
-      .patch(`/api/v1/availability/${id}/`, { available })
-      .then(resolve())
-      .catch(reject());
-  });
-};
-
-const HourInput = ({ hour, updateAvailability }) => {
+const HourInput = ({ hour, changeAvailability }) => {
   return (
-    <div
-      css={{ display: "flex", justifyContent: "space-between", marginTop: 10 }}
-    >
-      {hour.time.substr(0, 5)}
+    <div css={[buttonGroup, { marginTop: 10 }]}>
+      <span>{hour.time.substr(0, 5)}</span>
       <input
         type="checkbox"
         checked={hour.available}
-        onChange={event =>
-          changeAvailability(hour.id, event.target.checked).then(
-            updateAvailability()
-          )
-        }
+        onChange={event => changeAvailability(hour.id, event.target.checked)}
       />
     </div>
   );
 };
 
-export { changeAvailability };
 export default HourInput;
