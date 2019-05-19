@@ -3,7 +3,6 @@ import Enzyme from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import { MemoryRouter } from "react-router-dom";
 import RouterView from "components/common/RouterView";
-import { domainToASCII } from "url";
 Enzyme.configure({ adapter: new Adapter() });
 
 describe("test NavigationBar component", () => {
