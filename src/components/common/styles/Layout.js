@@ -1,6 +1,6 @@
 import { css } from "@emotion/core";
 
-const flexCenter = css({
+const flexCenterRow = css({
   height: "100%",
   width: "100%",
   display: "flex",
@@ -8,7 +8,8 @@ const flexCenter = css({
   alignItems: "center"
 });
 
-const flexCenterColumn = css([flexCenter, { flexDirection: "column" }]);
+const flexCenterColumn = css([flexCenterRow, { flexDirection: "column" }]);
+
 const floatingWarning = css({
   color: "white",
   position: "fixed",
@@ -40,7 +41,7 @@ const floatingNavbar = css({
 export {
   floatingNavbar,
   formLayout,
-  flexCenter,
+  flexCenterRow as flexCenter,
   flexCenterColumn,
   floatingWarning,
   buttonGroup
