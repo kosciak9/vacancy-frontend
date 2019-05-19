@@ -1,8 +1,9 @@
 import React from "react";
-import ReactDOM from "react-dom";
 import Enzyme from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import DateModal from "components/availability/DateModal";
+import MockDate from "mockdate";
+import DayPicker from "react-day-picker";
 
 Enzyme.configure({ adapter: new Adapter() });
 
@@ -14,18 +15,26 @@ describe("<DateModal />", () => {
   });
 
   it("should render correct amount of months on mobile", () => {
+    // @ts-ignore
     global.innerWidth = 500;
     const updateParent = jest.fn();
     const wrapper = Enzyme.mount(<DateModal updateParent={updateParent} />);
-    wrapper.find("div").simulate("click");
+    wrapper
+      .find("div")
+      .first()
+      .simulate("click");
     expect(wrapper.find(".DayPicker-Month").length).toBe(1);
   });
 
   it("should render correct amount of months on desktop", () => {
+    // @ts-ignore
     global.innerWidth = 1920;
     const updateParent = jest.fn();
     const wrapper = Enzyme.mount(<DateModal updateParent={updateParent} />);
-    wrapper.find("div").simulate("click");
+    wrapper
+      .find("div")
+      .first()
+      .simulate("click");
     expect(wrapper.find(".DayPicker-Month").length).toBe(5);
   });
 
@@ -33,29 +42,37 @@ describe("<DateModal />", () => {
     const updateParent = jest.fn();
     const wrapper = Enzyme.mount(<DateModal updateParent={updateParent} />);
     expect(wrapper.children.length).toBe(1);
-    wrapper.find("div").simulate("click");
+    wrapper
+      .find("div")
+      .first()
+      .simulate("click");
     expect(wrapper.find(".DayPicker").length).toBe(1);
-    wrapper.find("button").simulate("click");
+    wrapper.findWhere(node => node.props().width === 120).simulate("click");
     expect(wrapper.find(".DayPicker").length).toBe(0);
     expect(updateParent).toHaveBeenCalledWith({
-      from: undefined,
-      to: undefined
+      from: null,
+      to: null
     });
   });
 
-  // it("clicking outside of modal should close it", () => {
-  //   const updateParent = jest.fn();
-  //   const outerNode = document.createElement("div");
-  //   document.body.appendChild(outerNode);
-  //   const wrapper = Enzyme.mount(<DateModal updateParent={updateParent} />, {
-  //     attachTo: outerNode
-  //   });
-  //   expect(wrapper.children.length).toBe(1);
-  //   wrapper.find(".DateModal-Result").simulate("click");
-  //   expect(wrapper.find(".DayPicker").length).toBe(1);
-  //   outerNode.dispatchEvent(new Event("focus", { bubbles: true }));
-  //   outerNode.dispatchEvent(new Event("blur", { bubbles: true }));
-  //   expect(wrapper.find(".DayPicker").length).toBe(0);
-  //   expect(updateParent).not.toHaveBeenCalled();
-  // });
+  it("clicking day should add it to date range", () => {
+    MockDate.set("1/1/2001");
+    const today = new Date();
+    const tomorrow = new Date(today);
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    const updateParent = jest.fn();
+    const wrapper = Enzyme.mount(
+      <DateModal updateParent={updateParent} from={today} to={today} />
+    );
+    wrapper
+      .find("div")
+      .first()
+      .simulate("click");
+    wrapper.find("DayPicker").prop("onDayClick")(tomorrow);
+    wrapper.findWhere(node => node.props().width === 120).simulate("click");
+    expect(updateParent).toHaveBeenCalledWith({
+      from: today,
+      to: tomorrow
+    });
+  });
 });
