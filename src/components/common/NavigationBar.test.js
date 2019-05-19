@@ -18,7 +18,7 @@ describe("test NavigationBar component", () => {
         <NavigationBar login={mockLoginStore} />
       </MemoryRouter>
     );
-    expect(wrapper.contains(NavigationBar)).toBeTruthy;
+    expect(wrapper.find(NavigationBar)).toBeTruthy();
   });
   it("should mount with four routes", () => {
     const mockLogout = jest.fn(() => {});
@@ -32,19 +32,6 @@ describe("test NavigationBar component", () => {
     expect(wrapper.find(SVGButton)).toHaveLength(1);
   });
 
-  it("clicking NavLink should change route", () => {
-    const mockLogout = jest.fn(() => {});
-    const mockLoginStore = { userLogout: mockLogout };
-    const wrapper = Enzyme.mount(
-      <MemoryRouter>
-        <NavigationBar login={mockLoginStore} />
-      </MemoryRouter>
-    );
-    const AvailabilityLink = wrapper.find(NavLink).first();
-    AvailabilityLink.simulate("click");
-    expect(location.pathname === "/availability");
-  });
-
   it("clicking logout fire login.userLogout", () => {
     const mockLogout = jest.fn(() => {});
     const mockLoginStore = { userLogout: mockLogout };
@@ -53,8 +40,7 @@ describe("test NavigationBar component", () => {
         <NavigationBar login={mockLoginStore} />
       </MemoryRouter>
     );
-    const AvailabilityLink = wrapper.find(SVGButton);
-    AvailabilityLink.simulate("click");
+    wrapper.find(SVGButton).simulate("click");
     expect(mockLogout).toHaveBeenCalled();
   });
 });
