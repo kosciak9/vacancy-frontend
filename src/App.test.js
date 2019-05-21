@@ -12,4 +12,5 @@ describe("<App />", () => {
     );
     expect(wrapper.find(App)).toBeTruthy();
   });
+});
 
