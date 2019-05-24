@@ -19,17 +19,20 @@ class LoginContainer extends Container {
   };
 
   fetchUserInfo = async () => {
-    const userInfo = await this.state.agent.get("/api/auth/user/me");
+    const userInfo = await this.state.agent.get("/api/auth/me/");
     const playerInfo = await this.state.agent.get(
       `/api/v1/users/${userInfo.data.id}/`
     );
-    await this.setState({ team: playerInfo.data.team });
+    const teamInfo = await this.state.agent.get(
+      `/api/v1/teams/${playerInfo.data.team}/`
+    );
+    await this.setState({ ...teamInfo.data, ...playerInfo.data });
   };
 
   prepareAxiosAgent = async token => {
     const agent = token
       ? axios.create({
-          headers: { authorization: `Bearer ${token}` }
+          headers: { authorization: `Token ${token}` }
         })
       : undefined;
     await this.setState({ agent, __action: "AGENTCHANGE" });

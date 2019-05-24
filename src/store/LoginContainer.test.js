@@ -65,13 +65,19 @@ describe("LoginContainer", () => {
   describe("test fetching userInfo", () => {
     const USER_ID = "ad5839f0-2395-4cfe-add4-b1a58dfb4b9b";
     it("should work", async done => {
-      moxios.stubRequest("/api/auth/user/me", {
+      moxios.stubRequest("/api/auth/me/", {
         status: 200,
         response: {
           id: USER_ID
         }
       });
       moxios.stubRequest(`/api/v1/users/${USER_ID}/`, {
+        status: 200,
+        response: {
+          team: 1
+        }
+      });
+      moxios.stubRequest(`/api/v1/teams/1/`, {
         status: 200,
         response: {
           team: 1
