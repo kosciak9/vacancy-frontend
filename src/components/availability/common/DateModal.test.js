@@ -1,7 +1,7 @@
 import React from "react";
 import Enzyme from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
-import DateModal from "components/availability/DateModal";
+import DateModal from "components/availability/common/DateModal";
 import MockDate from "mockdate";
 import DayPicker from "react-day-picker";
 

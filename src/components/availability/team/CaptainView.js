@@ -1,5 +1,6 @@
 /** @jsx jsx */
 import { jsx } from "@emotion/core";
+import fetchAvailability from "components/availability/common/FetchAvailability";
 
 const CaptainView = () => {
   return (

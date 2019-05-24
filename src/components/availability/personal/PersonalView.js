@@ -3,7 +3,7 @@ import { jsx } from "@emotion/core";
 import { Provider, Subscribe } from "unstated";
 
 import LoginContainer from "store/LoginContainer";
-import AvailabilityContainer from "components/availability/AvailabilityContainer";
+import AvailabilityContainer from "components/availability/personal/PersonalAvailability";
 
 const AvailabilityView = () => {
   return (
@@ -11,7 +11,7 @@ const AvailabilityView = () => {
       <Subscribe to={[LoginContainer]}>
         {login => (
           <main css={{ paddingTop: 100 }}>
-            <AvailabilityContainer client={login.state.client} />
+            <AvailabilityContainer login={login} />
           </main>
         )}
       </Subscribe>
