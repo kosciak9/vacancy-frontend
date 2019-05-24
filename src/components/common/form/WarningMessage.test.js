@@ -7,8 +7,12 @@ Enzyme.configure({ adapter: new Adapter() });
 
 describe("test NavigationBar component", () => {
   it("should mount", () => {
-    const wrapper = Enzyme.mount(<WarningMessage message={"hello world"} />);
+    const wrapper = Enzyme.shallow(<WarningMessage message={"hello world"} />);
     expect(wrapper.find(WarningMessage)).toBeTruthy();
-    expect(wrapper.find(WarningMessage).text()).toContain("hello world");
+  });
+
+  it("should show proper text", () => {
+    const wrapper = Enzyme.render(<WarningMessage message={"hello world"} />);
+    expect(wrapper.text()).toContain("hello world");
   });
 });

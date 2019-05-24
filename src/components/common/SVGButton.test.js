@@ -7,13 +7,14 @@ Enzyme.configure({ adapter: new Adapter() });
 
 describe("<SVGButton />", () => {
   it("should mount", () => {
-    const wrapper = Enzyme.mount(<SVGButton />);
-    expect(wrapper.find("button")).toBeTruthy();
+    const wrapper = Enzyme.shallow(<SVGButton />);
+    expect(wrapper.find(SVGButton)).toBeTruthy();
   });
+
   it("should respond to click event", () => {
     const onClickMock = jest.fn();
-    const wrapper = Enzyme.mount(<SVGButton onClick={onClickMock} />);
-    wrapper.find("button").simulate("click");
+    const wrapper = Enzyme.shallow(<SVGButton onClick={onClickMock} />);
+    wrapper.first().simulate("click");
     expect(onClickMock).toHaveBeenCalledTimes(1);
   });
 });
