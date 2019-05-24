@@ -17,8 +17,8 @@ import FacebookLogo from "components/common/svgs/facebook.svg";
 import TwitterLogo from "components/common/svgs/twitter.svg";
 import validate from "components/common/form/FormValidation";
 
-const LogicForm = ({ login }) => {
-  const [warningMessage, setMessage] = useState(null);
+const LogicForm = ({ login, initialMessage = null }) => {
+  const [warningMessage, setMessage] = useState(initialMessage);
   const userLogin = formSubmit(login.userLogin, setMessage);
 
   const buttonHeight = 40;
@@ -55,6 +55,7 @@ const LogicForm = ({ login }) => {
           backgroundColor={SuccessGreen}
           image={SubmitArrow}
           altText="submit button, arrow"
+          type="submit"
         />
       </div>
     </Form>
