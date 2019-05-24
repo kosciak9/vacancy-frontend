@@ -1,6 +1,5 @@
 /** @jsx jsx */
 import { jsx } from "@emotion/core";
-import axios from "axios";
 import { buttonGroup } from "components/common/styles/Layout";
 
 const HourInput = ({ hour, changeAvailability }) => {
@@ -10,7 +9,9 @@ const HourInput = ({ hour, changeAvailability }) => {
       <input
         type="checkbox"
         checked={hour.available}
-        onChange={event => changeAvailability(hour.id, event.target.checked)}
+        onChange={event =>
+          changeAvailability(hour.date, hour.id, event.target.checked)
+        }
       />
     </div>
   );
