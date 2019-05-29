@@ -1,24 +1,22 @@
 /** @jsx jsx */
 import { jsx } from "@emotion/core";
 import { format } from "date-fns";
-import { changeAvailability } from "components/availability/HourInput";
 
 import clone from "components/common/svgs/clone.svg";
 import all from "components/common/svgs/all.svg";
 import none from "components/common/svgs/none.svg";
 
-import HourInput from "components/availability/HourInput";
+import HourInput from "components/availability/personal/HourInput";
 import SVGButton from "components/common/SVGButton";
 
 const turnWholeDay = (availability, updateAvailability, value) => {
   availability.map(async hour => {
-    await changeAvailability(hour.id, value);
     return true;
   });
   updateAvailability();
 };
 
-const DayContainer = ({ day, availability, updateAvailability }) => {
+const DayInput = ({ day, availability, updateAvailability }) => {
   const formattedDay = format(new Date(day), "ddd, DD.MM");
   const children = availability.map(hour => {
     return (
@@ -82,4 +80,4 @@ const DayContainer = ({ day, availability, updateAvailability }) => {
   );
 };
 
-export default DayContainer;
+export default DayInput;
