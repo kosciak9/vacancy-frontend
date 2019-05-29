@@ -7,7 +7,7 @@ import App from "./App";
 Enzyme.configure({ adapter: new Adapter() });
 
 describe("<App />", () => {
-  it("should mount", () => {
+  it("should show LoginView when user not logged in", () => {
     const login = {
       state: { userLoggedIn: false },
       setState: jest.fn(),
@@ -22,7 +22,7 @@ describe("<App />", () => {
     expect(wrapper.find(App)).toBeTruthy();
     expect(wrapper.find("LoginView")).toBeTruthy();
   });
-  it("should show RouterView", () => {
+  it("should show RouterView when user logged in", () => {
     const login = {
       state: { userLoggedIn: true },
       setState: jest.fn(),
