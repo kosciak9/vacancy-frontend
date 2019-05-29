@@ -7,7 +7,7 @@ Enzyme.configure({ adapter: new Adapter() });
 
 describe("test NavigationBar component", () => {
   it("should mount", () => {
-    const wrapper = Enzyme.shallow(
+    const wrapper = Enzyme.mount(
       <MemoryRouter>
         <RouterView />
       </MemoryRouter>
