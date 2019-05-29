@@ -14,7 +14,7 @@ describe("<App />", () => {
       subscribe: jest.fn(),
       unsubscribe: jest.fn()
     };
-    const wrapper = Enzyme.shallow(
+    const wrapper = Enzyme.mount(
       <Provider inject={[login]}>
         <App />
       </Provider>
@@ -29,7 +29,7 @@ describe("<App />", () => {
       subscribe: jest.fn(),
       unsubscribe: jest.fn()
     };
-    const wrapper = Enzyme.shallow(
+    const wrapper = Enzyme.mount(
       <Provider inject={[login]}>
         <App />
       </Provider>
