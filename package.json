@@ -6,7 +6,7 @@
     "@emotion/core": "^10.0.10",
     "axios": "^0.18.0",
     "date-fns": "^1.30.1",
-    "informed": "^2.7.4",
+    "informed": "^2.7.6",
     "lodash": "^4.17.11",
     "normalize.css": "^8.0.1",
     "polished": "^3.4.0",
