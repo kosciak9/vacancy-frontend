@@ -32,4 +32,23 @@ const createAvailability = (agent, player, date, time, available) => {
   });
 };
 
-export { createAvailability, updateAvailability, fetchAvailability };
+const createOnUndefined = async (agent, player, date, time, available) => {
+  let availabilityInstance = await fetchAvailability(agent, player, date, time);
+  if (!availabilityInstance) {
+    availabilityInstance = await createAvailability(
+      agent,
+      player,
+      date,
+      time,
+      false
+    );
+  }
+  return availabilityInstance;
+};
+
+export {
+  createOnUndefined,
+  createAvailability,
+  updateAvailability,
+  fetchAvailability
+};

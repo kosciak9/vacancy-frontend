@@ -65,7 +65,11 @@ const DayInput = ({ day, availability }) => {
         </div>
       </h2>
       {availability.map(hour => (
-        <HourInput hour={hour} key={hour.id} changeAvailability={() => {}} />
+        <HourInput
+          hour={hour}
+          key={hour ? hour.id : null}
+          changeAvailability={() => {}}
+        />
       ))}
     </div>
   );

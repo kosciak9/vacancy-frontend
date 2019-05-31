@@ -1,36 +1,46 @@
-import { each } from "lodash";
-import { returnTeamHours } from "components/availability/common/PrepareHours";
 import {
-  fetchAvailability,
-  createAvailability
-} from "components/availability/common/ManageAvailability";
-import { format } from "date-fns";
+  returnTeamHours,
+  returnTimeObject
+} from "components/availability/common/PrepareHours";
+import { createOnUndefined } from "components/availability/common/ManageAvailability";
+import {
+  format,
+  eachDay,
+  setHours,
+  setMinutes,
+  setMilliseconds
+} from "date-fns";
 
-const prepareAvailability = async (agent, user, hourSettings) => {
-  const { startDate, interval, amount } = hourSettings;
-  const hourRange = returnTeamHours(startDate, interval, amount);
+const prepareAvailability = async (
+  agent,
+  id,
+  datesRange,
+  startHour,
+  hourCount,
+  interval
+) => {
   const availability = {};
-  each(hourRange, async date => {
-    const formattedTime = format(date, "HH:mm:00");
-    const formattedDate = format(date, "YYYY-MM-DD");
-    if (!availability[formattedDate]) availability[formattedDate] = [];
-    let instance = await fetchAvailability(
-      agent,
-      user,
-      formattedDate,
-      formattedTime
+  const { hours, minutes } = returnTimeObject(startHour || "08:30:00");
+  const dates = eachDay(datesRange.from, datesRange.to);
+  for (let i = 0; i < dates.length; i++) {
+    const formattedDate = format(dates[i], "YYYY-MM-DD");
+    availability[formattedDate] = [];
+    const startDate = setMilliseconds(
+      setMinutes(setHours(dates[i], hours), minutes),
+      0
     );
-    if (!instance) {
-      instance = await createAvailability(
+    const teamHours = returnTeamHours(startDate, interval, hourCount);
+    for (let j = 0; j < teamHours.length; j++) {
+      const formattedTime = format(teamHours[j], "HH:mm:00");
+      const availabilityInstance = await createOnUndefined(
         agent,
-        user,
+        id,
         formattedDate,
-        formattedTime,
-        false
+        formattedTime
       );
+      availability[formattedDate].push(availabilityInstance);
     }
-    availability[formattedDate].push(instance);
-  });
+  }
   return availability;
 };
 

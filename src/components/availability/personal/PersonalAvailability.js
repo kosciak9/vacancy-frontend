@@ -1,38 +1,42 @@
 /** @jsx jsx */
 import { jsx } from "@emotion/core";
 import DateModal from "components/availability/common/DateModal";
-import DayInput from "components/availability/personal/DayInput";
 import { flexCenter } from "components/common/styles/Layout";
-import { mapValues, values } from "lodash";
 import { useEffect, useState } from "react";
+import { addDays } from "date-fns";
+import { transform } from "lodash";
+import prepareAvailability from "components/availability/personal/PrepareAvailability";
+import DayInput from "components/availability/personal/DayInput";
 
 const AvailabilityContainer = ({ login }) => {
-  const [hoursRange, setHoursRange] = useState({ from: null, to: null });
+  const [datesRange, setDatesRange] = useState({ from: null, to: null });
   const [availability, setAvailability] = useState({});
 
+  // get user information
   useEffect(() => {
     if (login.state.userLoggedIn) login.fetchUserInfo();
   }, [login]);
 
-  // useEffect(() => {
-  //   const startHour = login.state.start_hour || "08:00:00";
-  //   const { hours, minutes } = returnTimeObject(startHour);
-  //   setAvailability({});
-  //   const dayRange = eachDay(hoursRange.from, hoursRange.to);
-  //   each(dayRange, day => {
-  //     const iterationDay = setMilliseconds(
-  //       setMinutes(setHours(day, hours), minutes),
-  //       0
-  //     );
-  //     prepareAvailability(login.state.agent, login.state.id, {
-  //       iterationDay,
-  //       interval: login.state.interval,
-  //       amount: login.state.hour_count
-  //     }).then(availabilityInstance =>
-  //       setAvailability({ ...availability, availabilityInstance })
-  //     );
-  //   });
-  // }, [login.state, hoursRange.from, hoursRange.to]);
+  // generate basic dates before users inputs custom ones
+  useEffect(() => {
+    const daysAhead = login.state.priority_days_ahead || 5;
+    const from = new Date();
+    const to = addDays(from, daysAhead);
+    setDatesRange({ from, to });
+  }, [login.state.priority_days_ahead]);
+
+  // fetch or create availability based on dates selected
+  useEffect(() => {
+    const { agent, id, hour_count, interval, start_hour } = login.state;
+    prepareAvailability(
+      agent,
+      id,
+      datesRange,
+      start_hour,
+      hour_count,
+      interval
+    ).then(updatedAvailability => setAvailability(updatedAvailability));
+  }, [datesRange, login.state]);
 
   return (
     <div
@@ -44,16 +48,17 @@ const AvailabilityContainer = ({ login }) => {
       }}
     >
       <DateModal
-        login={login}
-        from={hoursRange.from}
-        to={hoursRange.to}
-        updateParent={setHoursRange}
+        from={datesRange.from}
+        to={datesRange.to}
+        updateParent={setDatesRange}
       />
       <div css={flexCenter}>
-        {values(
-          mapValues(availability, (availability, day) => (
-            <DayInput key={day} day={day} availability={availability} />
-          ))
+        {transform(
+          availability,
+          (result, dayAvailability, day) => {
+            result.push(<DayInput day={day} availability={dayAvailability} />);
+          },
+          []
         )}
       </div>
     </div>

@@ -1,10 +1,22 @@
 /** @jsx jsx */
 import { jsx } from "@emotion/core";
-import { buttonGroup } from "components/common/styles/Layout";
+import { buttonGroup, flexCenter } from "components/common/styles/Layout";
 
-const HourInput = ({ hour, changeAvailability }) => {
+const HourInput = ({
+  hour = { time: "error", available: false },
+  changeAvailability
+}) => {
   return (
-    <div css={[buttonGroup, { marginTop: 10 }]}>
+    <div
+      css={[
+        flexCenter,
+        {
+          justifyContent: "space-between",
+          width: "100%",
+          marginTop: 10
+        }
+      ]}
+    >
       <span>{hour.time.substr(0, 5)}</span>
       <input
         type="checkbox"
