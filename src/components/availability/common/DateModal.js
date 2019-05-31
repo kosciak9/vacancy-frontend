@@ -1,15 +1,15 @@
 /** @jsx jsx */
-import { jsx, css } from "@emotion/core";
-import { useState } from "react";
-import { Fragment } from "react";
-import Modal from "react-modal";
-// @ts-ignore
-import DayPicker, { DateUtils } from "react-day-picker";
-import dateFnsFormat from "date-fns/format";
-import "components/common/styles/DatePicker.css";
-import SVGButton from "components/common/SVGButton";
+import { css, jsx } from "@emotion/core";
 import { InputOrange } from "components/common/styles/Colors";
+import "components/common/styles/DatePicker.css";
 import { flexCenterColumn } from "components/common/styles/Layout";
+import SVGButton from "components/common/SVGButton";
+import { DateUtils } from "react-day-picker";
+import { addDays, format } from "date-fns";
+import { Fragment, useEffect, useState } from "react";
+// @ts-ignore
+import DayPicker from "react-day-picker";
+import Modal from "react-modal";
 
 const DateInput = css([flexCenterColumn], {
   "> *": { margin: 10 },
@@ -24,12 +24,19 @@ const HourSpan = css({
   fontWeight: 700
 });
 
-const DateModal = ({ updateParent, from = null, to = null }) => {
+const DateModal = ({ updateParent, from, to, login }) => {
   // a11y - screen readers will acknowledge the modal's content
   /* istanbul ignore next */
   if (process.env.NODE_ENV !== "test") Modal.setAppElement("#root");
 
   const [hoursRange, setHoursRange] = useState({ from, to });
+  useEffect(() => setHoursRange({ from, to }), [from, to, setHoursRange]);
+
+  useEffect(() => {
+    const from = new Date();
+    const to = addDays(from, login.state.priority_days_ahead || 1);
+    setHoursRange({ from, to });
+  }, [login.state.priority_days_ahead]);
   const modifiers = { start: hoursRange.from, end: hoursRange.to };
   const monthsCount = Math.floor(window.innerWidth / 300) - 1;
 
@@ -46,11 +53,15 @@ const DateModal = ({ updateParent, from = null, to = null }) => {
       <div css={DateInput} className="DateModal-Result" onClick={toggleModal}>
         <div>
           <span css={HourSpan}>
-            {dateFnsFormat(hoursRange.from, "DD.MM.YYYY")}
+            {hoursRange.from
+              ? format(hoursRange.from, "DD.MM.YYYY")
+              : "not selected yet"}
           </span>
           {" to "}
           <span css={HourSpan}>
-            {dateFnsFormat(hoursRange.to, "DD.MM.YYYY")}
+            {hoursRange.to
+              ? format(hoursRange.to, "DD.MM.YYYY")
+              : "not selected yet"}
           </span>
         </div>
         <SVGButton

@@ -15,3 +15,5 @@ export const InputBackground = "rgba(217, 217, 217, 0.3)";
 
 export const ActiveNavigationLink = "#88BF29";
 export const HoveredNavigationLink = "rgba(136, 191, 41, 0.5)";
+
+export const MiscAction = "#961FA8";
