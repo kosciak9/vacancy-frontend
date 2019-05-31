@@ -5,7 +5,7 @@ import "components/common/styles/DatePicker.css";
 import { flexCenterColumn } from "components/common/styles/Layout";
 import SVGButton from "components/common/SVGButton";
 import { DateUtils } from "react-day-picker";
-import { addDays, format } from "date-fns";
+import { format } from "date-fns";
 import { Fragment, useEffect, useState } from "react";
 // @ts-ignore
 import DayPicker from "react-day-picker";
@@ -24,19 +24,14 @@ const HourSpan = css({
   fontWeight: 700
 });
 
-const DateModal = ({ updateParent, from, to, login }) => {
+const DateModal = ({ updateParent, from = null, to = null }) => {
   // a11y - screen readers will acknowledge the modal's content
   /* istanbul ignore next */
   if (process.env.NODE_ENV !== "test") Modal.setAppElement("#root");
 
   const [hoursRange, setHoursRange] = useState({ from, to });
-  useEffect(() => setHoursRange({ from, to }), [from, to, setHoursRange]);
+  useEffect(() => setHoursRange({ from, to }), [from, to]);
 
-  useEffect(() => {
-    const from = new Date();
-    const to = addDays(from, login.state.priority_days_ahead || 1);
-    setHoursRange({ from, to });
-  }, [login.state.priority_days_ahead]);
   const modifiers = { start: hoursRange.from, end: hoursRange.to };
   const monthsCount = Math.floor(window.innerWidth / 300) - 1;
 
