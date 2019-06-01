@@ -32,6 +32,7 @@ const createAvailability = (agent, player, date, time, available) => {
   });
 };
 
+/* istanbul ignore next */
 const createOnUndefined = async (agent, player, date, time, available) => {
   let availabilityInstance = await fetchAvailability(agent, player, date, time);
   if (!availabilityInstance) {
