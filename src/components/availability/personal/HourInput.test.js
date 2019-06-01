@@ -8,12 +8,8 @@ Enzyme.configure({ adapter: new Adapter() });
 describe("<HourInput />", () => {
   it("should mount", () => {
     const changeAvailability = jest.fn();
-    const hour = {
-      time: "10:00:00",
-      available: true
-    };
     const wrapper = Enzyme.shallow(
-      <HourInput hour={hour} changeAvailability={changeAvailability} />
+      <HourInput changeAvailability={changeAvailability} />
     );
     expect(wrapper.find(HourInput)).toBeTruthy();
   });
