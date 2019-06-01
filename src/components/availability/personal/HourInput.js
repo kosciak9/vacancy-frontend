@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import { jsx } from "@emotion/core";
-import { buttonGroup, flexCenter } from "components/common/styles/Layout";
+import { flexCenter } from "components/common/styles/Layout";
 
 const HourInput = ({
   hour = { time: "error", available: false },
