@@ -8,7 +8,7 @@ import { transform } from "lodash";
 import prepareAvailability from "components/availability/personal/PrepareAvailability";
 import DayInput from "components/availability/personal/DayInput";
 
-const AvailabilityContainer = ({ login }) => {
+const PersonalAvailability = ({ login }) => {
   const [datesRange, setDatesRange] = useState({ from: null, to: null });
   const [availability, setAvailability] = useState({});
 
@@ -65,4 +65,4 @@ const AvailabilityContainer = ({ login }) => {
   );
 };
 
-export default AvailabilityContainer;
+export default PersonalAvailability;
