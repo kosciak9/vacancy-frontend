@@ -15,8 +15,8 @@ describe("<PersonalAvailability />", () => {
     const fetchUserInfo = jest.fn();
     const login = { state, fetchUserInfo };
     const wrapper = Enzyme.shallow(<PersonalAvailability login={login} />);
-    expect(wrapper.find(PersonalAvailability)).toBeTruthy();
-    expect(wrapper.find("DateModal")).toBeTruthy();
+    expect(wrapper.exists()).toBeTruthy();
+    expect(wrapper.find("DateModal").exists()).toBeTruthy();
   });
 
   // how to fix this? TODO :(
