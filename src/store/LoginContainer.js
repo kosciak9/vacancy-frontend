@@ -45,10 +45,14 @@ class LoginContainer extends Container {
     } else {
       token = localStorage.getItem("userToken");
     }
-    this.prepareAxiosAgent(token);
-    localStorage.setItem("userToken", token);
-    await this.setState({ userLoggedIn: true, __action: "USERLOGIN" });
-    return true;
+    if (token) {
+      this.prepareAxiosAgent(token);
+      localStorage.setItem("userToken", token);
+      await this.setState({ userLoggedIn: true, __action: "USERLOGIN" });
+      return true;
+    } else {
+      return false;
+    }
   };
 
   changePassword = async ({ newPassword, reNewPassword, currentPassword }) => {
