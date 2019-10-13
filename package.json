@@ -14,6 +14,7 @@
     "reakit": "^1.0.0-beta.9",
     "reakit-system-bootstrap": "^0.6.6",
     "shevyjs": "^1.1.0",
+    "unstated-next": "^1.1.0",
     "wouter": "^2.3.0",
     "wretch": "^1.5.4"
   },
