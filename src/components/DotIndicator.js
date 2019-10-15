@@ -20,10 +20,7 @@ export default function DotIndicator({ success, failure, message }) {
             : "inherit"
         })}
       >
-        {
-          // eslint-disable-line jsx-a11y/accessible-emoji
-        }
-        ⚫
+        •
       </TooltipReference>
       <Tooltip
         {...tooltip}
