@@ -3,15 +3,12 @@ import { jsx } from "@emotion/core";
 import theme from "common/theme";
 import IconButton from "components/IconButton";
 import NavigationLink from "components/NavigationLink";
-import { Toolbar, ToolbarItem, useToolbarState } from "reakit/Toolbar";
 import { LogOut } from "react-feather";
 
 export default function NavigationBar() {
-  const toolbar = useToolbarState({ loop: true });
   return (
-    <Toolbar
-      {...toolbar}
-      aria-label="My toolbar"
+    <nav
+      aria-label="Navigation menu"
       css={theme => ({
         display: "flex",
         alignItems: "center",
@@ -23,31 +20,15 @@ export default function NavigationBar() {
         width: "100%"
       })}
     >
-      <NavigationLink href="/personal">
-        <ToolbarItem {...toolbar} as={"span"}>
-          Your availability
-        </ToolbarItem>
-      </NavigationLink>
-      <NavigationLink href="/team">
-        <ToolbarItem {...toolbar} as={"span"}>
-          Team availability
-        </ToolbarItem>
-      </NavigationLink>
+      <NavigationLink href="/personal">Your availability</NavigationLink>
+      <NavigationLink href="/team">Team availability</NavigationLink>
       <NavigationLink href="/personal/settings">
-        <ToolbarItem {...toolbar} as={"span"}>
-          Personal settings
-        </ToolbarItem>
+        Personal settings
       </NavigationLink>
-      <NavigationLink href="/team/settings">
-        <ToolbarItem {...toolbar} as={"span"}>
-          Team settings
-        </ToolbarItem>
-      </NavigationLink>
+      <NavigationLink href="/team/settings">Team settings</NavigationLink>
       <IconButton color={theme.palette.warning} aria-label="logout">
-        <ToolbarItem {...toolbar} as={"span"}>
-          <LogOut />
-        </ToolbarItem>
+        <LogOut />
       </IconButton>
-    </Toolbar>
+    </nav>
   );
 }
