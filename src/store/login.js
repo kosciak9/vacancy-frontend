@@ -5,7 +5,7 @@ import { createContainer } from "unstated-next";
 const useLogin = () => {
   const [login, setLogin] = useState({ loggedIn: false, token: null });
   const loginUser = async (email, password) => {
-    const w = wretch().url("/authenticate");
+    const w = wretch().url("/api/authenticate");
     try {
       const response = await w.post({ email, password }).json();
       setLogin(login => {

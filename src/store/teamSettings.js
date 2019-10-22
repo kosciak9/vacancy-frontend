@@ -75,7 +75,7 @@ const useTeamSettings = () => {
     if (state.unfetched && login.loggedIn) {
       const { token } = login;
       wretch()
-        .url("/me/team")
+        .url("/api/me/team")
         .auth(token)
         .get()
         .json()
@@ -92,7 +92,7 @@ const useTeamSettings = () => {
     if (state.players.unfetched && login.loggedIn) {
       const { token } = login;
       wretch()
-        .url("/me/team/player")
+        .url("/api/me/team/player")
         .auth(token)
         .get()
         .json()
@@ -109,7 +109,7 @@ const useTeamSettings = () => {
     if (state.templateGroups.unfetched && login.loggedIn) {
       const { token } = login;
       wretch()
-        .url("/me/team/template_group")
+        .url("/api/me/team/template_group")
         .auth(token)
         .get()
         .json()
@@ -131,7 +131,7 @@ const useTeamSettings = () => {
       const { token } = login;
       wretch()
         .url(
-          `/team/${state.settings.id}/template_group/${state.editedTemplateGroup.currentlyViewed}/template`
+          `/api/team/${state.settings.id}/template_group/${state.editedTemplateGroup.currentlyViewed}/template`
         )
         .auth(token)
         .get()

@@ -56,7 +56,7 @@ const useTeamOverview = () => {
     if (state.unfetched && login.loggedIn) {
       const { token } = login;
       wretch()
-        .url("/me/team/overview")
+        .url("/api/me/team/overview")
         .auth(token)
         .query(state.query)
         .get()
@@ -74,7 +74,7 @@ const useTeamOverview = () => {
     if (state.players.unfetched && login.loggedIn) {
       const { token } = login;
       wretch()
-        .url("/me/team/player")
+        .url("/api/me/team/player")
         .auth(token)
         .get()
         .json()

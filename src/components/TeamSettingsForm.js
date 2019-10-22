@@ -35,7 +35,7 @@ export default function TeamSettingsForm() {
       }
     },
     onSubmit: async values => {
-      const response = await wretch(`/team/${state.settings.id}`)
+      const response = await wretch(`/api/team/${state.settings.id}`)
         .auth(token)
         .put(values)
         .json();

@@ -40,7 +40,8 @@ export default function AddTemplateDialog({ teamId, templateGroupId }) {
     );
 
     try {
-      await wretch(`/team/${teamId}/template_group/${templateGroupId}/template`)
+      await wretch()
+        .url(`/api/team/${teamId}/template_group/${templateGroupId}/template`)
         .auth(login.token)
         .post({
           from: fromDate.toISOString(),

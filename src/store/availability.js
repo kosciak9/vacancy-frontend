@@ -53,7 +53,7 @@ const useAvailability = () => {
     if (state.unfetched && login.loggedIn) {
       const { token } = login;
       wretch()
-        .url("/me/mapped")
+        .url("/api/me/mapped")
         .auth(token)
         .query(state.query)
         .get()

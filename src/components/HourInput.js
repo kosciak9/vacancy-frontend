@@ -14,7 +14,7 @@ export default function HourInput({ av, date }) {
   const { token } = login;
   const updateAvailability = newAv => {
     wretch()
-      .url(`/me/availability/${newAv.id}`)
+      .url(`/api/me/availability/${newAv.id}`)
       .auth(token)
       .put(newAv)
       .json()
