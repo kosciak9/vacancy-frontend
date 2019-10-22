@@ -13,16 +13,8 @@ export default function LoginView() {
   const { loginUser } = Login.useContainer();
   const form = useFormState({
     values: { email: "", password: "" },
-    onValidate: values => {
-      if (!values.password) {
-        const errors = {
-          password: "Please provide password"
-        };
-        throw errors;
-      }
-    },
     onSubmit: values => {
-      loginUser(values);
+      loginUser(values.email, values.password);
     }
   });
 
@@ -50,7 +42,7 @@ export default function LoginView() {
         name="email"
         placeholder="hello@vacancy.com"
       />
-      <FormMessage {...form} name="name" />
+      <FormMessage {...form} name="email" />
       <FormInput
         {...form}
         css={theme => ({
