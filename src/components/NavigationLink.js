@@ -17,7 +17,7 @@ export default function NavigationLink(props) {
           padding: theme.spacing(2),
           paddingTop: theme.spacing(3),
           paddingBottom: theme.spacing(3),
-          borderRadius: 0,
+          borderRadius: 2,
           border: "none",
           color: "black",
           "&.active": {

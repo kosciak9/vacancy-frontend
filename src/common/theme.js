@@ -1,6 +1,6 @@
 import Shevy from "shevyjs";
 
-const typography = new Shevy();
+const typography = new Shevy({ addMarginBottom: false });
 const SPACING_AMOUNT = 4;
 
 const theme = {

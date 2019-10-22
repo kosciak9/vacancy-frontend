@@ -26,7 +26,11 @@ export default function NavigationBar() {
         Personal settings
       </NavigationLink>
       <NavigationLink href="/team/settings">Team settings</NavigationLink>
-      <IconButton color={theme.palette.warning} aria-label="logout">
+      <IconButton
+        color={theme.palette.warning}
+        aria-label="logout"
+        message="Logout from application"
+      >
         <LogOut />
       </IconButton>
     </nav>
