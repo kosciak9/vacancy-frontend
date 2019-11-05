@@ -10,18 +10,22 @@ import wretch from "wretch";
 import TimeField from "react-simple-timefield";
 import { setHours, setMinutes, setSeconds } from "date-fns";
 
-export default function AddTemplateDialog({ teamId, templateGroupId }) {
+export default function AddTemplateDialog({
+  initialWeekday,
+  teamId,
+  templateGroupId
+}) {
   const dialog = useDialogState();
   const weekdays = [
-    { id: 1, name: "Monday" },
-    { id: 2, name: "Tuesday" },
-    { id: 3, name: "Wednesday" },
-    { id: 4, name: "Thursday" },
-    { id: 5, name: "Friday" },
-    { id: 6, name: "Saturday" },
-    { id: 7, name: "Sunday" }
+    { id: 0, name: "Monday" },
+    { id: 1, name: "Tuesday" },
+    { id: 2, name: "Wednesday" },
+    { id: 3, name: "Thursday" },
+    { id: 4, name: "Friday" },
+    { id: 5, name: "Saturday" },
+    { id: 6, name: "Sunday" }
   ];
-  const [weekday, setWeekday] = useState("");
+  const [weekday, setWeekday] = useState(initialWeekday);
   const [from, setFrom] = useState("");
   const [to, setTo] = useState("");
   const { login } = Login.useContainer();
@@ -55,6 +59,7 @@ export default function AddTemplateDialog({ teamId, templateGroupId }) {
       console.error(error);
     }
   };
+
   return (
     <Fragment>
       <DialogDisclosure

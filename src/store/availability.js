@@ -3,6 +3,7 @@ import { useReducer, useEffect } from "react";
 import { createContainer } from "unstated-next";
 import { find } from "lodash";
 import produce from "immer";
+import { getNextMonday } from "store/common";
 
 import Login from "store/login";
 
@@ -28,24 +29,24 @@ function availabilityReducer(state, action) {
     case availabilityTypes.REFETECH:
       return { ...state, unfetched: true };
     case availabilityTypes.UPDATE_QUERY:
-      return { ...state, query: action.payloa };
+      console.log(action);
+      return produce(state, draft => {
+        if (action.payload.date) {
+          draft.query.start_date = action.payload.date.toISOString();
+        }
+        draft.query.days = action.payload.days || draft.query.days;
+        draft.unfetched = true;
+      });
     default:
       throw new Error("Reducer type unknown");
   }
 }
 
-const getNextMonday = () => {
-  const d = new Date();
-  return new Date(
-    d.setDate(d.getDate() + ((1 + 7 - d.getDay()) % 7))
-  ).toISOString();
-};
-
 const useAvailability = () => {
   const [state, dispatch] = useReducer(availabilityReducer, {
     query: { start_date: getNextMonday(), days: 6 },
     items: [],
-    unfetched: false
+    unfetched: true
   });
 
   const { login } = Login.useContainer();

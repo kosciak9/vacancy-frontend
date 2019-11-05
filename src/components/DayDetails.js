@@ -14,21 +14,25 @@ export default function DayDetails({ players, availabilities }) {
     <ul>
       {groupedByHour.map(hour => (
         <li key={hour.hour}>
-          <span
-            css={theme => ({
-              backgroundColor: theme.palette.warning,
-              borderRadius: 2,
-              paddingLeft: theme.spacing(1),
-              paddingRight: theme.spacing(1)
-            })}
-          >
-            {hour.hour} - {availabilities.length} players
-          </span>
+          {hour.hour}
           <ul>
             {hour.availabilities.map(av => (
-              <li key={av.id}>
+              <li
+                key={av.id}
+                css={theme => ({
+                  textDecoration: av.available ? null : "line-through",
+                  color: av.available
+                    ? av.uncertain
+                      ? theme.palette.warning
+                      : theme.palette.success
+                    : av.uncertain
+                    ? theme.palette.warning
+                    : theme.palette.invalid
+                })}
+              >
                 {get(players, `${av.player_id}.kit_number`, "kitNumberLoading")}
                 . {get(players, `${av.player_id}.name`, "nameLoading")}
+                {av.uncertain && " (%)"}
               </li>
             ))}
           </ul>

@@ -3,6 +3,7 @@ import { useReducer, useEffect } from "react";
 import { createContainer } from "unstated-next";
 import produce from "immer";
 import { transform } from "lodash";
+import { getNextMonday } from "store/common";
 
 import Login from "store/login";
 
@@ -35,13 +36,6 @@ function teamOverviewReducer(state, action) {
       throw new Error(`Reducer type unknown ${action.type}`);
   }
 }
-
-const getNextMonday = () => {
-  const d = new Date();
-  return new Date(
-    d.setDate(d.getDate() + ((1 + 7 - d.getDay()) % 7))
-  ).toISOString();
-};
 
 const useTeamOverview = () => {
   const [state, dispatch] = useReducer(teamOverviewReducer, {

@@ -10,7 +10,6 @@ const teamSettingsTypes = {
   UPDATE_TEMPLATE_GROUPS: "update_template_groups",
   UPDATE_TEMPLATES: "update_templates",
   UPDATE_PLAYERS: "update_players",
-  SET_CURRENTLY_VIEWED: "set_currently_viewed",
   REFRESH_TEMPLATES: "refresh_templates"
 };
 
@@ -52,10 +51,6 @@ function teamSettingsReducer(state, action) {
         draft.editedTemplateGroup.items = sortedTemplates;
         draft.editedTemplateGroup.unfetched = false;
       });
-    case teamSettingsTypes.SET_CURRENTLY_VIEWED:
-      return produce(state, draft => {
-        draft.editedTemplateGroup.currentlyViewed = action.payload;
-      });
     default:
       throw new Error(`Reducer type unknown: ${action.type}`);
   }
@@ -66,7 +61,7 @@ const useTeamSettings = () => {
     unfetched: true,
     settings: { name: "" },
     templateGroups: { items: [], unfetched: true },
-    editedTemplateGroup: { currentlyViewed: null, items: [], unfetched: true },
+    editedTemplateGroup: { items: [], unfetched: true },
     players: { items: [], unfetched: true }
   });
 
@@ -124,14 +119,14 @@ const useTeamSettings = () => {
 
   useEffect(() => {
     if (
-      state.editedTemplateGroup.currentlyViewed &&
+      state.settings.active_template_id &&
       state.editedTemplateGroup.unfetched &&
       login.loggedIn
     ) {
       const { token } = login;
       wretch()
         .url(
-          `/api/team/${state.settings.id}/template_group/${state.editedTemplateGroup.currentlyViewed}/template`
+          `/api/team/${state.settings.id}/template_group/${state.settings.active_template_id}/template`
         )
         .auth(token)
         .get()
@@ -148,6 +143,7 @@ const useTeamSettings = () => {
     dispatch,
     state.editedTemplateGroup.currentlyViewed,
     state.editedTemplateGroup.unfetched,
+    state.settings.active_template_id,
     state.settings.id
   ]);
 

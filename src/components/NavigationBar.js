@@ -4,8 +4,11 @@ import theme from "common/theme";
 import IconButton from "components/IconButton";
 import NavigationLink from "components/NavigationLink";
 import { LogOut } from "react-feather";
+import Login from "store/login";
 
 export default function NavigationBar() {
+  const { logoutUser } = Login.useContainer();
+
   return (
     <nav
       aria-label="Navigation menu"
@@ -30,6 +33,7 @@ export default function NavigationBar() {
         color={theme.palette.warning}
         aria-label="logout"
         message="Logout from application"
+        onClick={logoutUser}
       >
         <LogOut />
       </IconButton>
