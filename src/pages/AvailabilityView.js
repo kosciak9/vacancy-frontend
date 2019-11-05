@@ -6,8 +6,10 @@ import DayInputContainer from "components/DayInputContainer";
 import { Fragment } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import "common/datepicker.css";
 import { MoonLoader } from "react-spinners";
 import theme from "common/theme";
+import { Calendar } from "react-feather";
 
 export default function AvailabilityView() {
   const { state, dispatch } = Availability.useContainer();
@@ -33,7 +35,21 @@ export default function AvailabilityView() {
           justifyContent: "center"
         }}
       >
+        <Calendar size={32} />
         <DatePicker
+          calendarClassName="vacancy-picker"
+          css={theme => ({
+            height: 24,
+            boxSizing: "border-box",
+            borderRadius: 2,
+            border: "1px solid rgba(0, 0, 0, 0.3)",
+            textAlign: "center",
+            margin: theme.spacing(1),
+            fontWeight: "bold",
+            fontSize: "1.2em",
+            width: 150,
+            padding: theme.spacing(4)
+          })}
           selected={new Date(state.query.start_date)}
           onChange={date =>
             dispatch({
