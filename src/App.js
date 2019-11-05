@@ -9,6 +9,7 @@ import Login from "store/login";
 import { Switch, Route } from "wouter";
 import AvailabilityView from "pages/AvailabilityView";
 import TeamSettingsView from "pages/TeamSettingsView";
+import SettingsView from "pages/SettingsView";
 import LoginView from "pages/LoginView";
 import Availability from "store/availability";
 import TeamOverview from "store/teamOverview";
@@ -29,7 +30,7 @@ export default function App() {
                 <NavigationBar />
                 <Switch>
                   <Route path="/personal" component={AvailabilityView} />
-                  <Route path="/personal/settings">Personal Settings</Route>
+                  <Route path="/personal/settings" component={SettingsView} />
                   <Route path="/team" component={TeamView} />
                   <Route path="/team/settings" component={TeamSettingsView} />
                 </Switch>

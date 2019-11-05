@@ -29,7 +29,6 @@ function availabilityReducer(state, action) {
     case availabilityTypes.REFETECH:
       return { ...state, unfetched: true };
     case availabilityTypes.UPDATE_QUERY:
-      console.log(action);
       return produce(state, draft => {
         if (action.payload.date) {
           draft.query.start_date = action.payload.date.toISOString();

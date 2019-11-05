@@ -23,8 +23,6 @@ export default function AvailabilityView() {
     flexDirection: ["column", "row"]
   });
 
-  console.log(state.query);
-
   return (
     <Fragment>
       <aside

@@ -47,7 +47,19 @@ const useLogin = () => {
       };
     });
   };
-  return { login, loginUser, logoutUser };
+
+  const changePassword = async newPassword => {
+    const w = wretch()
+      .url("/api/me/password")
+      .auth(login.token);
+    try {
+      await w.post({ new_password: newPassword }).res();
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  return { login, loginUser, logoutUser, changePassword };
 };
 
 const Login = createContainer(useLogin);
